@@ -50,9 +50,22 @@ export default function TransactionPage() {
   };
 
   useEffect(() => {
-    loadTransaction();
-    loadStats();
-  }, [page, limit, search]);
+  const fetchData = async () => {
+    try {
+      const res = await fetchTransaction(page, limit, search);
+      setTransaction(res.data);
+      setTotalPages(res.pagination.totalPages);
+
+      const statRes = await fetchTotalExpenseStat();
+      setStats(statRes.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData();
+}, [page, search]);
+
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -110,7 +123,7 @@ export default function TransactionPage() {
 
         <Link
           href="/dashboard/transaction/create"
-          className="bg-indigo-600 text-white px-4 py-2 rounded-md flex items-center justify-center gap-2 hover: bg-indigo-700 w-full sm:w-fit"
+          className="bg-indigo-600 text-white px-4 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-indigo-700 w-full sm:w-fit"
         >
           <FaPlus /> Buat Transaksi
         </Link>

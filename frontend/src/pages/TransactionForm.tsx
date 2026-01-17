@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TransaksiProps } from "@/interfaces";
 import { CategoryOption, TransactionFormData } from "@/interfaces/ITransaction";
 import convertNumRupiah from "@/utils/convertNumRupiah";
@@ -41,7 +41,7 @@ const TransactionForm: React.FC<TransaksiProps> = ({
         amount: String(initialData.amount)
       })
     }
-  }, [])
+  }, [initialData])
 
   useEffect(() => {
     loadCategories();

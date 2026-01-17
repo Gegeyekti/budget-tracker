@@ -41,11 +41,35 @@ export default function EditTransactionPage() {
     }
   };
 
-  useEffect(() => {
-    if (id) {
-      loadTransaction();
+ useEffect(() => {
+  if (!id) return;
+
+  const fetchData = async () => {
+    try {
+      const res = await fetchTransactionById(Number(id));
+      const tx = res.data;
+
+      setInitialData({
+        type: tx.type,
+        amount: tx.amount != null ? String(tx.amount) : "",
+        date: tx.date ? new Date(tx.date).toISOString().slice(0, 10) : "",
+        note: tx.note ?? "",
+        categoryId: tx.category_id,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        setModal({ message: error.message, type: "danger" });
+      } else {
+        setModal({ message: "Terjadi Kesalahan", type: "danger" });
+      }
+    } finally {
+      setLoading(false);
     }
-  }, [id]);
+  };
+
+  fetchData();
+}, [id]);
+
 
   const handleSubmit = async (form: TransactionFormData) => {
     setisSubmitting(true);
