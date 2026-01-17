@@ -10,8 +10,13 @@ import { ModalProps } from "@/interfaces/IModal";
 import { TransactionFormData } from "@/interfaces/ITransaction";
 
 export default function EditTransactionPage() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams<{ id: string}>();
+  const id = params?.id;
   const router = useRouter();
+
+  if (!id) {
+    return <div>Invalid Transaction ID</div>
+  }
 
   const [initialData, setInitialData] = useState<TransactionFormData>();
   const [loading, setLoading] = useState(true);
