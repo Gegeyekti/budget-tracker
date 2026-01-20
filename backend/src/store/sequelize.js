@@ -9,6 +9,9 @@ const sequelize = new Sequelize(process.env.MYSQL_URL, {
     acquire: 30000,
     idle: 10000,
   },
+  dialectOptions: {
+    connectTimeout: 30000,
+  },
 });
 
 (async () => {

@@ -37,6 +37,7 @@ class AuthService {
         const userJson = user.toJSON();
         delete userJson.password;
         return { user: userJson, token }
+        console.log("DB HOST:", User.sequelize.options.host);
     }
 
     async profile(userId){
