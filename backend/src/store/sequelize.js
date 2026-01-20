@@ -1,5 +1,5 @@
+
 const { Sequelize } = require("sequelize");
-const config = require("../config/config");
 
 
 console.log("DB ENV CHECK =>", {
@@ -9,9 +9,6 @@ console.log("DB ENV CHECK =>", {
 });
 
 console.log("DB USER CHECK =>", process.env.DB_USER);
-
-
-const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(process.env.MYSQL_URL, {
   dialect: "mysql",
