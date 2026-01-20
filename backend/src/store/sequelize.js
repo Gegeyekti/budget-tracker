@@ -8,6 +8,9 @@ console.log("DB ENV CHECK =>", {
   DB_DATABASE: process.env.DB_DATABASE,
 });
 
+console.log("DB USER CHECK =>", process.env.DB_USER);
+
+
 const sequelize = new Sequelize(
   config.db.database,
   config.db.username,
