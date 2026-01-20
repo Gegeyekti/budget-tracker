@@ -1,6 +1,13 @@
 const { Sequelize } = require("sequelize");
 const config = require("../config/config");
 
+
+console.log("DB ENV CHECK =>", {
+  DB_HOST: process.env.DB_HOST,
+  DB_PORT: process.env.DB_PORT,
+  DB_DATABASE: process.env.DB_DATABASE,
+});
+
 const sequelize = new Sequelize(
   config.db.database,
   config.db.username,
