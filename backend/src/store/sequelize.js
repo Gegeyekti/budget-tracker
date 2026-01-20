@@ -1,14 +1,4 @@
-
 const { Sequelize } = require("sequelize");
-
-
-console.log("DB ENV CHECK =>", {
-  DB_HOST: process.env.DB_HOST,
-  DB_PORT: process.env.DB_PORT,
-  DB_DATABASE: process.env.DB_DATABASE,
-});
-
-console.log("DB USER CHECK =>", process.env.DB_USER);
 
 const sequelize = new Sequelize(process.env.MYSQL_URL, {
   dialect: "mysql",
@@ -21,5 +11,14 @@ const sequelize = new Sequelize(process.env.MYSQL_URL, {
   },
 });
 
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+    process.exit(1);
+  }
+})();
 
 module.exports = sequelize;
