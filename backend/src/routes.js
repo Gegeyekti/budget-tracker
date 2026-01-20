@@ -14,7 +14,7 @@ router.use('/category', categoryRoutes);
 router.use('/transaction', transactionRoutes);
 router.use('/monthly-summary', monthlySummaryRoutes);
 
-router.use((req, res) => {
+router.use((req, res, next) => {
     throw new NotFound("Route Tidak Ditemukan!")
 })
 

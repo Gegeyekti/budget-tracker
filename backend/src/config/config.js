@@ -1,26 +1,24 @@
 const dotenv = require("dotenv");
-dotenv.config({
-  path: process.env.DOTENV_PATH || ".env",
-});
+dotenv.config();
 
-const dbDialect = "mysql";
-
-module.exports =  {
+module.exports = {
   db: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+    database: process.env.DB_NAME,
     host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT) || 3306,
-    dialect: dbDialect,
+    port: Number(process.env.DB_PORT) || 3306,
+    dialect: "mysql",
   },
+
   server: {
-    baseUrl: process.env.SERVER_BASE_URL || "http://localhost:5001",
-    port: parseInt(process.env.SERVER_PORT) || 5001,
+    port: Number(process.env.PORT) || 5001,
   },
+
   jwt: {
     secret: process.env.JWT_SECRET,
   },
+
   llm: {
     gemini: process.env.GEMINI_API_KEY,
     openRouter: process.env.OPENROUTER_API_KEY,
