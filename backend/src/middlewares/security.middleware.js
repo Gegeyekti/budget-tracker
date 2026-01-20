@@ -14,8 +14,9 @@ const enableCORS = cors(corsOptions);
 
 const setSecurityHeaders = helmet({
   contentSecurityPolicy: false,
-  frameguard: { action: "deny" },
-  crossOriginResourcePolicy: { policy: "cross-origin" },
+  frameguard: { action: 'deny' },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
 });
+
 
 module.exports = { enableCORS, setSecurityHeaders };
